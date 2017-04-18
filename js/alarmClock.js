@@ -1,15 +1,19 @@
-// var apiKey = require('./../.env').apiKey;
+// var userAlarmTime = moment().add(7, 'days');
 
-function Weather(){
+function Alarm(){
+  var time;
 }
 
-Weather.prototype.getWeather = function(city, displayHumidity) {
-  $.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey).then(function(response) {
-    displayHumidity(city, response.main.humidity);
-  // $('.showWeather').text("The humidity in " + city + " is " + response.main.humidity + "%");
-}).fail(function(error) {
-  $('.showWeather').text(error.responseJSON.message);
-});
+Alarm.prototype.alarmAlert = function(){
+  var now = moment();
+  console.log(this.time); //.format("HH:mm")
+  if(this.time && now.isSameOrAfter(this.time)){
+    alert("Wake up!");
+  }
 };
 
-exports.weatherModule = Weather;
+Alarm.prototype.setAlarm = function(userTime){
+  this.time = moment(userTime, 'HH:mm');
+};
+
+exports.alarmModule = Alarm;
