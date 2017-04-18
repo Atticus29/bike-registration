@@ -10,15 +10,13 @@ var update = function(){
 }
 
 $(document).ready(function() {
-  // var currentAlarmClock = new alarmClock();
-  // var currentTime = moment();
   datetime = $('#clock-display');
   update();
-  // $("#clock-display").text(currentTime);
   setInterval(update, 1000);
   $('#alarm-form').submit(function() {
-    // var city = $('#location').val();
-    // $('#location').val("");
-    // currentWeatherObject.getWeather(city, displayHumidity);
+    event.preventDefault();
+    var userTime = $('#alarm-time').val();
+    console.log(typeof userTime);
+    $('#times').append('<li>' + userTime + '</li>');
   });
 });
