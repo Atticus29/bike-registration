@@ -4,6 +4,7 @@
 var currentTime = null;
 var datetime = null;
 var userAlarmTime = null;
+var alarmID;
 
 var update = function(){
   currentTime = moment();
@@ -11,30 +12,32 @@ var update = function(){
   shouldAlarmGoOff(userAlarmTime)
   console.log(userAlarmTime);
 }
+function alarmAlert(userAlarmTime) {
+  $.get('http://worldclockapi.com/api/json/utc/now', function(response){
+    console.log(response.currentDateTime);
+    var now = moment(response.currentDateTime);
+    alarmID = window.setTimeout(alert("wake up!"),(userAlarmTime.diff(now)));
+  });
+}
 
 var shouldAlarmGoOff = function(alarmTime){
-  var now = moment();
-  console.log(now);
-  if(now.isAfter(alarmTime)){
-    console.log("Alarm should go off now!: " + now);
-  } else{
-    console.log("Alarm should not go off now.");
-  }
-  return now.isAfter(alarmTime);
+
 }
 
 $(document).ready(function() {
   // event.preventDefault();
   datetime = $('#clock-display');
   update();
-  setInterval(update, 800000);
+  setInterval(update, 1000);
   $('#alarm-form').submit(function() {
     event.preventDefault();
     var userTime = $('#alarm-time').val();
     console.log(typeof userTime);
-    userAlarmTime = moment(userTime,'HH:MM');
+    userAlarmTime = moment(userTime,'YYYY-MM-DDTHH:mmZ');
+    // userAlarmTime = moment(userTime,'MM:HH');
     console.log(typeof userAlarmTime);
     console.log(userAlarmTime);
+    alarmAlert(userAlarmTime);
     $('#times').append('<li>' + userTime + '</li>');
   });
 });
