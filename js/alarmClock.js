@@ -1,4 +1,4 @@
-var apiKey = require('./../.env').apiKey;
+// var apiKey = require('./../.env').apiKey;
 
 function Weather(){
 }
@@ -10,6 +10,6 @@ Weather.prototype.getWeather = function(city, displayHumidity) {
 }).fail(function(error) {
   $('.showWeather').text(error.responseJSON.message);
 });
-}
+};
 
 exports.weatherModule = Weather;
