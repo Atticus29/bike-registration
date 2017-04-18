@@ -9,7 +9,7 @@ var update = function(){
 };
 
 var unleashAlarmingThings = function(){
-
+  $('.gif').show();
 };
 
 $(document).ready(function() {
