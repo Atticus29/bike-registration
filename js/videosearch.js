@@ -1,0 +1,1 @@
+let channelName = getChannelName();

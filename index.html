@@ -6,26 +6,15 @@
     <link rel="stylesheet" href="build/css/styles.css">
     <script src="build/js/vendor.min.js"></script>
     <script type="text/javascript" src="build/js/app.js"></script>
-    <title>Alarm Clock</title>
+    <title>Channel Videos</title>
   </head>
   <body>
     <div class="container">
-      <div class="jumbotron">
-        <h1 id="clock-display"></h1>
-      </div>
-      <form id="alarm-form">
-        <label for="alarm-time">Enter alarm time</label>
-        <input id="alarm-time" type="time">
-        <button type="submit" class="btn btn-danger">Set Alarm</button>
+      <form id="search-form">
+        <label for="channel-name">Enter user's YouTube username</label>
+        <input type="text" name="channel-name" id="channel-name" class="form-control">
+        <button type="submit" name="button" class="btn btn-primary">Search</button>
       </form>
-      <div>
-        <ul id="times">
-
-        </ul>
-      </div>
-      <div class="gif">
-        <a href='http://www.gifbin.com/989562' title='Funny Gifs'><img src='http://www.gifbin.com/bin/112015/alarm-clock-that-slaps-you-in-the-face-simone-giertz.gif'></a>
-      </div>
     </div>
   </body>
 </html>
