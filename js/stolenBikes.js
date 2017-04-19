@@ -22,13 +22,10 @@ Bike.prototype.addStolenBikesToArray = function(allBikes){
     });
   })
   .then(console.log(allBikes));
-  // determineMostStolenManufacturer(allBikes)
 };
 
 Bike.prototype.setColor = function (userName){
   this.userName = userName;
 };
 
-
 exports.bikeModule = Bike;
-// exports.bikeArray = allBikes;
