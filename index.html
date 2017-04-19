@@ -6,15 +6,24 @@
     <link rel="stylesheet" href="build/css/styles.css">
     <script src="build/js/vendor.min.js"></script>
     <script type="text/javascript" src="build/js/app.js"></script>
-    <title>Channel Videos</title>
+    <title>Popular Bike Models to Steal In Your Area</title>
   </head>
   <body>
     <div class="container">
+      <div class="jumbotron">
+        <h3>Commonly Stolen Models of Bike</h3>
+      </div>
+      <p>Does the most popular manufacturer of bike to steal across the country differ from the most popular one in  your area? Enter your address to find out!</p>
       <form id="search-form">
-        <label for="channel-name">Enter user's YouTube username</label>
-        <input type="text" name="channel-name" id="channel-name" class="form-control">
+        <label for="address">Enter your address</label>
+        <input type="text" name="address" id="address" class="form-control" required value="Example 101 Maple Lane, Portland, OR">
         <button type="submit" name="button" class="btn btn-primary">Search</button>
       </form>
+      <div class="hidden">
+        <table>
+
+        </table>
+      </div>
     </div>
   </body>
 </html>
