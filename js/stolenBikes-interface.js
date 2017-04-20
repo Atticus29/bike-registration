@@ -1,16 +1,17 @@
 var Bike = require("./../js/stolenBikes.js").bikeModule;
 
-var populateWithLocalAndGlobalMostStolenManufacturersAndTheirCounts = function(globalBikeArray, localBikeArray){
-
+var populateHTMLidWithMostStolenInfoFromBikeArray = function(listHTMLid, bikeArray){
+  var mostStolen = determineMostStolenManufacturerAndCount(bikeArray);
+  $("#" + listHTMLid).append("<li>" + mostStolen.maxEl + " with " + mostStolen.maxCount + " bikes stolen</li>")
 }
 
 var determineMostStolenManufacturerAndCount = function(bikeArray){
   var manufacturerArray = bikeArray.map((bike)=>{ return bike.manufacturer});
-  console.log(manufacturerArray);
+  // console.log(manufacturerArray);
   // var manufacturerArray = getArrayOfManufacturers(bikeArray);
   var mostStolen = getMostCommonAndItsCount(manufacturerArray);
-  console.log(mostStolen);
-  // return mostStolen;
+  // console.log(mostStolen);
+  return mostStolen;
 };
 
 function getMostCommonAndItsCount(array)
@@ -35,16 +36,23 @@ function getMostCommonAndItsCount(array)
     return {maxEl, maxCount};
 }
 
-// var getArrayOfManufacturers = function(bikeArray){
-//   var manufacturerArray = [];
-//   bikeArray.forEach(function(bike){
-//     manufacturerArray.push(bike.manufacturer);
-//   });
-//   return manufacturerArray;
-// };
+function findAndReplace(string, target, replacement) {
+ var i = 0, length = string.length;
+ for (i; i < length; i++) {
+   string = string.replace(target, replacement);
+ }
+ return string;
+}
 
 $(() => {
   var currentBike = new Bike();
-  var address = $("#address").val();
-  currentBike.addStolenBikesToArray(determineMostStolenManufacturerAndCount, address);
+  $("#search-form").submit(() => {
+    event.preventDefault();
+    $(".hidden").show();
+    var address = $("#address").val();
+    var addressWithNoSpaces = findAndReplace(address, " ", "%20N%20");
+    var addressWithNoCommas = findAndReplace(addressWithNoSpaces, ",", "%2C%20");
+    currentBike.addAllStolenBikes(populateHTMLidWithMostStolenInfoFromBikeArray);
+    currentBike.addLocalStolenBikes(populateHTMLidWithMostStolenInfoFromBikeArray, addressWithNoCommas);
+  })
 });

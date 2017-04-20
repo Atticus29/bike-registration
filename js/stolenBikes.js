@@ -11,48 +11,31 @@ Bike = function(dateStolen, frameColors, frameModel, id, imageUrl, manufacturer,
   this.year = year;
 };
 
-Bike.prototype.addStolenBikesToArray = function(populateWithLocalAndGlobalMostStolenManufacturersAndTheirCounts, address){
+Bike.prototype.addAllStolenBikes = function(populateHTMLidWithMostStolenInfoFromBikeArray){
   var allBikes = [];
-  var localBikes = [];
   $.get("https://bikeindex.org:443/api/v3/search?page=1&per_page=25&location=IP&distance=10&stolenness=stolen")
   .then((response) => {
     response.bikes.forEach(function(bike){
       var currentBike = new Bike(bike.date_stolen, bike.frame_colors, bike.frame_model, bike.id, bike.thumb, bike.manufacturer_name, bike.serial, bike.stolen_location, bike.title, bike.year);
       allBikes.push(currentBike);
-    })
+    });
+    populateHTMLidWithMostStolenInfoFromBikeArray("all-bikes", allBikes);
   })
-  .then(() => {
-    $.get("https://bikeindex.org:443/api/v3/search?page=1&per_page=25&location=" + address + "&distance=10&stolenness=proximity")
-  })
+};
+
+Bike.prototype.addLocalStolenBikes = function(populateHTMLidWithMostStolenInfoFromBikeArray, address){
+  var localBikes = [];
+  var queryString = "https://bikeindex.org:443/api/v3/search?page=1&per_page=25&location=" + address + "&distance=10&stolenness=proximity";
+  console.log(queryString);
+  $.get(queryString)
   .then((response) => {
     response.bikes.forEach(function(bike){
       var currentBike = new Bike(bike.date_stolen, bike.frame_colors, bike.frame_model, bike.id, bike.thumb, bike.manufacturer_name, bike.serial, bike.stolen_location, bike.title, bike.year);
       localBikes.push(currentBike);
-    })
+    });
+    populateHTMLidWithMostStolenInfoFromBikeArray("local-bikes", localBikes);
   })
-  .then(() => {
-    populateWithLocalAndGlobalMostStolenManufacturersAndTheirCounts(allBikes, localBikes);
-  });
 };
 
-// Bike.prototype.addStolenBikesToArray = function(allBikes, determineMostStolenManufacturer){
-//   $.get("https://bikeindex.org:443/api/v3/search?page=1&per_page=25&location=IP&distance=10&stolenness=stolen")
-//   .then((response) => {
-//     response.bikes.forEach(function(bike){
-//       var currentBike = new Bike(bike.date_stolen, bike.frame_colors, bike.frame_model, bike.id, bike.thumb, bike.manufacturer_name, bike.serial, bike.stolen_location, bike.title, bike.year);
-//       allBikes.push(currentBike);
-//       // this displays an ever-growing array of bike objects
-//       // console.log(allBikes);
-//     })
-//   })
-//   // this displays an empty array
-//   .then(() => {
-//     determineMostStolenManufacturer(allBikes);
-//   });
-// };
-
-Bike.prototype.setColor = function (userName){
-  this.userName = userName;
-};
 
 exports.bikeModule = Bike;

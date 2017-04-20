@@ -15,14 +15,22 @@
       </div>
       <p>Does the most popular manufacturer of bike to steal across the country differ from the most popular one in  your area? Enter your address to find out!</p>
       <form id="search-form">
-        <label for="address">Enter your address</label>
-        <input type="text" name="address" id="address" class="form-control" required value="Example 101 Maple Lane, Portland, OR">
+        <label for="address">Enter your address (e.g. 101 Maple Lane, Portland, OR)</label>
+        <input type="text" name="address" id="address" class="form-control" required>
         <button type="submit" name="button" class="btn btn-primary">Search</button>
       </form>
       <div class="hidden">
-        <table>
+        <div class="row">
+          <div class="col-md-6">
+            <ul id="all-bikes">
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul id="local-bikes">
 
-        </table>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </body>
