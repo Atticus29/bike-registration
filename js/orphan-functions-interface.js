@@ -1,4 +1,4 @@
-var Bike = require("./../js/stolenBikes.js").bikeModule;
+// OAuth.initialize('AIzaSyDVRxDf-d9elarp-IRAC-hBYrx6nevrGLM');
 
 var populateHTMLidWithMostStolenInfoFromBikeArray = function(listHTMLid, bikeArray){
   var mostStolen = determineMostStolenManufacturerAndCount(bikeArray);
@@ -8,23 +8,20 @@ var populateHTMLidWithMostStolenInfoFromBikeArray = function(listHTMLid, bikeArr
 
 var determineMostStolenManufacturerAndCount = function(bikeArray){
   var manufacturerArray = bikeArray.map((bike)=>{ return bike.manufacturer});
-  // console.log(manufacturerArray);
-  // var manufacturerArray = getArrayOfManufacturers(bikeArray);
   var mostStolen = getMostCommonAndItsCount(manufacturerArray);
-  // console.log(mostStolen);
   return mostStolen;
 };
 
 function getMostCommonAndItsCount(array)
 {
-    if(array.length === 0) //interestin
+    if(array.length === 0)
         return null;
     var modeMap = {};
     var maxEl = array[0], maxCount = 1;
     for(var i = 0; i < array.length; i++)
     {
         var el = array[i];
-        if(modeMap[el] == null)
+        if(modeMap[el] == null) //don't change this to ===!
             modeMap[el] = 1;
         else
             modeMap[el]++;
@@ -44,16 +41,3 @@ function findAndReplace(string, target, replacement) {
  }
  return string;
 }
-
-$(() => {
-  var currentBike = new Bike();
-  $("#search-form").submit(() => {
-    event.preventDefault();
-    $(".hidden").show();
-    var address = $("#address").val();
-    var addressWithNoSpaces = findAndReplace(address, " ", "%20N%20");
-    var addressWithNoCommas = findAndReplace(addressWithNoSpaces, ",", "%2C%20");
-    currentBike.addAllStolenBikes(populateHTMLidWithMostStolenInfoFromBikeArray);
-    currentBike.addLocalStolenBikes(populateHTMLidWithMostStolenInfoFromBikeArray, addressWithNoCommas);
-  });
-});
