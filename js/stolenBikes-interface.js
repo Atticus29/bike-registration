@@ -2,7 +2,8 @@ var Bike = require("./../js/stolenBikes.js").bikeModule;
 
 var populateHTMLidWithMostStolenInfoFromBikeArray = function(listHTMLid, bikeArray){
   var mostStolen = determineMostStolenManufacturerAndCount(bikeArray);
-  $("#" + listHTMLid).append("<li>" + mostStolen.maxEl + " with " + mostStolen.maxCount + " bikes stolen</li>")
+  $("#" + listHTMLid).empty();
+  $("#" + listHTMLid).append("<li>" + mostStolen.maxEl + " with " + mostStolen.maxCount + " bikes stolen</li>");
 }
 
 var determineMostStolenManufacturerAndCount = function(bikeArray){
@@ -54,5 +55,5 @@ $(() => {
     var addressWithNoCommas = findAndReplace(addressWithNoSpaces, ",", "%2C%20");
     currentBike.addAllStolenBikes(populateHTMLidWithMostStolenInfoFromBikeArray);
     currentBike.addLocalStolenBikes(populateHTMLidWithMostStolenInfoFromBikeArray, addressWithNoCommas);
-  })
+  });
 });

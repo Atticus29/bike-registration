@@ -22,9 +22,13 @@ button{
   margin-top: 2%;
 }
 
-.hidden{
-  display: none;
+
+ul{
+  list-style: none;
 }
+// #hidden{
+//   display: none;
+// }
 
 body{
   background-color: $gray;
@@ -32,4 +36,8 @@ body{
 
 .container{
   margin-top: 10%;
+}
+
+.col-md-6{
+  text-align: center;
 }
