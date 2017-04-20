@@ -16,5 +16,8 @@ $(() => {
     var addressWithNoCommas = findAndReplace(addressWithNoSpaces, ",", "%2C%20");
     currentBike.addAllStolenBikes(populateHTMLidWithMostStolenInfoFromBikeArray);
     currentBike.addLocalStolenBikes(populateHTMLidWithMostStolenInfoFromBikeArray, addressWithNoCommas);
+    $.getScript("https://maps.googleapis.com/maps/api/js?key=" + apiKey, () =>{
+      initMapAroundAddress(address, 'local-bike-map');
+    });
   });
 });

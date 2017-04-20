@@ -26,7 +26,6 @@ Bike.prototype.addAllStolenBikes = function(populateHTMLidWithMostStolenInfoFrom
 Bike.prototype.addLocalStolenBikes = function(populateHTMLidWithMostStolenInfoFromBikeArray, address){
   var localBikes = [];
   var queryString = "https://bikeindex.org:443/api/v3/search?page=1&per_page=25&location=" + address + "&distance=10&stolenness=proximity";
-  console.log(queryString);
   $.get(queryString)
   .then((response) => {
     response.bikes.forEach(function(bike){

@@ -5,24 +5,14 @@ Map = function(){
 
 }
 
-Map.prototype.findLatLong = function(address){
-  $.get()
-  .then((result) =>{
-    console.log(result.geometry.location);
-    return result.geometry.location;
-  })
-}
-
-.geometry.location
-
-function initMap() {
-        var uluru = {lat: -25.363, lng: 131.044};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
+// Map.prototype.findLatLong = function(address){
+//   $.get('https://maps.googleapis.com/maps/api/geocode/json?address='+address+'&key='+apiKey)
+//     .then((response) =>{
+//       var returnObj = response.results[0].geometry.location;
+//       // console.log(returnObj);
+//       return returnObj;
+//     })
+//     .fail((error)=>{
+//       console.log(error.responseJSON.message);
+//     })
+// }
